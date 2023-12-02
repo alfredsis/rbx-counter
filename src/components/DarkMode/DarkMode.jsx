@@ -23,6 +23,8 @@ export const DarkMode = () => {
 
     return (    
         <>
+      <div className="contenedor2">
+
       
         <input type="checkbox" id="toggle_checkbox" onChange={toggleTheme}/>
 
@@ -33,6 +35,7 @@ export const DarkMode = () => {
         </div>
         <div id="moon"></div>
         </label>
+        </div>
 
 
         </> 

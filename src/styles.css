@@ -13,6 +13,16 @@
 --abu-act-bg: #476797;
 --abu-des-bg: #403848;
 
+--plus: #7d86ad;
+--plus-hov: #96a0cb;
+--plus-act: #3d4775;
+
+--minus: #a3c1e3;
+--minus-hov: #b6ceea;
+--minus-act: #5d7da1;
+
+--sign: #eaeaea;
+--border: rgb(177, 188, 224);
 --cont-txt: #687eaa;
 
 --add-min-bg: #eeeeee;
@@ -27,18 +37,30 @@
 }
 
 :root{
-  --bg-color: #50515f;
+  
+  --bg-color: rgb(13, 16, 27);
 --bg-cont: #3a3a44;
 
---chat-act-bg: #474377;
+--chat-act-bg: #434d77;
 --chat-des-bg: #434363;
 
 --img-act-bg:  #4b3c6f;
 --img-des-bg: #4a425b;
 
---abu-act-bg: #574162;
+--abu-act-bg: #5741623f;
 --abu-des-bg: #403848;
 
+--plus: #1e273c6e;
+--plus-hov: #273f546f;
+--plus-act: #3b4867da;
+
+
+--minus: #342b3aea;
+--minus-hov: #583c6fac;
+--minus-act: #412851d5;
+
+--sign: #4f4f4f;
+--border: rgb(37, 33, 63);
 
 --cont-txt: #787192;
 
@@ -50,7 +72,7 @@
 
 --last-txt: #707070;
 
---bg-img-total:-webkit-linear-gradient(120deg,#58508b 20%,#4b3076 100%);
+--bg-img-total:-webkit-linear-gradient(120deg,#50598b 20%,#3f3076 100%);
 }
 
 
@@ -71,6 +93,7 @@
     align-items: center;
     background: var(--bg-color);
     height: auto;
+    
   }
 
 
@@ -172,9 +195,9 @@
   /* ----------Counter Page --------------- */
 
 
-  .contenedor{
+  .contenedor-old{
     display: flex;
-    background-color: var(--bg-cont);
+    background-color: white;
     width: 400px;
     padding: 0 0 3px ;
     justify-content: center;
@@ -182,16 +205,178 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     margin-bottom: 100px;
     margin-top: 150px;
-
   }
+
+  .contador-box{
+    display: flex;    
+    justify-content: center;
+    width: 100%;
+  }
+
+ 
+
+  .contenedor{
+    display: flex;   
+    width: 100%;
+    padding:  90px 15px 70px 15px;       
+    justify-content: center;
+  }
+
+  @media( max-width: 600px){
+    .contenedor{
+      flex-wrap: wrap;
+      
+    }
+  
+    
+  }
+
+  
+
+  .contenedor2{
+    display: flex;   
+    width: 100%;          
+    justify-content: center;
+    padding-bottom: 50px;
+   
+  }
+
   .toggle-switch{
     margin: 0px;
     padding: 0x;
     width: 101%;
   }
 
+  .contador-box{
+    display: flex;
+    margin-top: 100px;
+
+  }
+  .cuenta{
+    margin: 0;
+    color: var(--cont-txt);
+    transition: top .5s ease;
+  }
+
+  .cuenta-name{
+    margin: 0;
+    color: var(--cont-txt);
+    font-size: 20px;
+  }
+
+  .box-que{  
+    font-size: 18px;
+    transition:  0.3s ease-in-out;
+    padding: 10px 15px;
+    border-radius: 7px;  
+    margin: 0 5px;
+    cursor: pointer;
+  }
+
+  @media( max-width: 600px){
+    .box-que{  
+      font-size: 15px;     
+      padding: 10px 15px;
+     
+    }
+    
+  }
+
+  .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 40px;
+    border: var(--border) solid 2px;
+    border-radius: 10px;
+    padding: 15px 10px;
+    margin: 5px 5px;
+    transition:  0.3s ease-in-out;
+    width: 30%;
+
+  }
+
+  @media( max-width: 600px){
+    
+    .box{
+      width: 17%;
+
+    }
+  
+    
+  }
 
 
+
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .plus{
+    border: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    font-size: 50px;
+    background-color: var(--plus);
+    font-family:'Times New Roman', Times, serif;
+    color: var(--sign);
+  }
+
+  .plus:hover{
+    background-color: var(--plus-hov);
+    transition:  0.2s ease-in-out;
+  }
+
+  .plus:active{
+    background-color: var(--plus-act);
+    transition:  0.2s ease-in-out;
+  }
+
+  .minus{
+    font-size: 40px;
+    border: solid var(--bg-color) 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: var(--minus);
+    margin-top: -20px;
+    font-family:'Times New Roman', Times, serif;
+    color: var(--sign);
+  }
+  .minus:hover{
+    background-color: var(--minus-hov);
+  }
+
+  .minus:active {
+    background-color: var(--minus-act);
+  }
+
+
+  .box-act{
+    background-color: var(--img-act-bg);
+    color: rgb(255, 255, 255);
+    text-shadow: -1px 0px 9px rgba(255, 255, 255, 0.39);
+   
+    transition:  0.3s ease-in-out;
+    padding: 10px 15px;
+    
+  }
+
+  .box-des{
+    background-color: var(--img-des-bg);
+    color: rgb(143, 143, 143);
+    transition:  0.3s ease-in-out;
+
+  }
+
+  .total{
+    border: var(--border) solid 2px; 
+    border-radius: 10px;    
+    padding: 10px 30px;
+  }
 
   .caja{
     
@@ -205,8 +390,17 @@
   border: none;
   font-size: 30px;
   font-weight: 700;
- 
   
+}
+
+.mostrar{
+  display: flex ;
+  transition:  1s ease-in-out;
+}
+
+.esconder{
+  display: none;
+  transition:  1s ease-in-out;
 }
 
 .chatAct{
@@ -322,6 +516,8 @@ font-size: 60px;
 }
 
   .reset{
+    display: flex;
+    justify-content: center;
   
   }
 
@@ -338,17 +534,21 @@ font-size: 60px;
   /* ----------Time Picker -------------------------------------- */
 
   .time-picker{
+
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 50%;
   }
 
   #appt {
     /* Estilos de fondo */
     background-color: var(--bg-cont);
     border: none;
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
+    width: 100%;
     
     /* Estilos de texto */
     font-size: 18px;
@@ -359,7 +559,7 @@ font-size: 60px;
     border: none;
     
     /* Estilos de tamaño */
-    width: 50%;
+    
     
     /* Estilos adicionales */
     /* Agrega cualquier estilo adicional que desees */
@@ -368,9 +568,9 @@ font-size: 60px;
   #h3-pick{
     background-color: var(--img-act-bg);
     color: white;
-    padding: 15px 10px;
+    padding: 15px 0px;
     margin: 0;
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: center;
     font-size: 22px;
@@ -381,7 +581,8 @@ font-size: 60px;
    
     height:30px;
     overflow: hidden;
-    width: 55%;
+    width: 100%;
+
    
     
     
@@ -414,10 +615,10 @@ font-size: 60px;
  }
 
  .set-time{
-  width: 55%;
+  width: 100%;
   border-radius: 0px;
   height: 60px;
-  background-color: var(--chat-act-bg);
+  background-color: var(--img-act-bg);
   color: white;
   border-style: none;
   cursor: pointer;
@@ -426,7 +627,7 @@ font-size: 60px;
 
  }
  .set-time:hover{
-  background-color: var(--chat-des-bg);
+  background-color: var(--img-des-bg);
   opacity: 0.8;
   transition:  0.3 ease;
 

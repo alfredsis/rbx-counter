@@ -48,6 +48,8 @@ export const Timer = () => {
 
   return (
 <>
+<div className="contenedor2">
+
 
 <div className="time-picker">
 
@@ -90,7 +92,9 @@ export const Timer = () => {
       )}
 
       
-    
+</div>
+
+
 </>
   )
 }
