@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import 'animate.css';
 
@@ -6,12 +5,6 @@ import 'animate.css';
 
 
 export const CounterApp = () => {
-
-  // const [isChecked, setIsChecked] = useState(false);
-  const[isCheckedC, setIsCheckedC] =  useState(false);
-  const[isCheckedI, setIsCheckedI] =  useState(false);
-  const[isCheckedA, setIsCheckedA] =  useState(false);
-
   const [chatActive, setChatActive] = useState(false);
   const [imagenActive, setImagenActive] = useState(false);
   const [abuseActive, setAbuseActive] = useState(false);
@@ -27,227 +20,171 @@ export const CounterApp = () => {
   const [countAudio, setCountAudio] = useState(0);
   
   
-  const [tiempo, setTiempo] = useState(0);
+  
 
 
   const readLocalStorage = () => {
-    const saveChats = localStorage.getItem('contChats');
-    const saveImages = localStorage.getItem('contImag');
-    const saveAbu = localStorage.getItem('contAbu');
-    const saveSkp = localStorage.getItem('contSkip');
-    const saveMdl = localStorage.getItem('countModel');
-    const saveAud = localStorage.getItem('countAudio');
-
-    if (saveChats) {
-      setCountChats(parseInt(saveChats));
-    } else {
-      localStorage.setItem('contChats', '0');
-    }
-
-    if (saveImages) {
-      setCountImag(parseInt(saveImages));
-    } else {
-      localStorage.setItem('contImag', '0');
-    }
-
-    if (saveAbu){
-      setCountAbu(parseInt(saveAbu));
-    } else {
-      localStorage.setItem('contAbu', '0');
-    }
-    if (saveSkp) {
-      setCountSkip(parseInt(saveSkp));
-    } else {
-      localStorage.setItem('contSkip', '0');
-    }
-
-    if (saveMdl) {
-      setCountModel(parseInt(saveMdl));
-    } else {
-      localStorage.setItem('contModel', '0');
-    }
-
-    if (saveAud){
-      setCountAudio(parseInt(saveAud));
-    } else {
-      localStorage.setItem('contAudio', '0');
-    }
-
-
-
-  };
-
-  useEffect(() => {
-    readLocalStorage();
+    const counterData = JSON.parse(localStorage.getItem('countersData'));
     
-  }, []);
 
-
-
-  useEffect(() => {
-
-    const intervalo = setInterval(() => {
-      setTiempo(prevContador => prevContador + 1);
-
-      
-    }, 60000); // 1000 milisegundos = 1 segundo
-
-    return () => {
-      clearInterval(intervalo);
+    return counterData || {
+      countChats: 0,
+      countImag: 0,
+      countAbu: 0,
+      countSkip: 0,
+      countModel: 0,
+      countAudio: 0
     };
-  }, []);
 
+    
 
- 
-
-  const activaChats = () => {
-    setIsCheckedC(true);
-    setIsCheckedI(false);
-    setIsCheckedA(false);
-   
   };
 
-  const activaAbuse = ()=>{
-    setIsCheckedC(false);
-    setIsCheckedI(false);
-    setIsCheckedA(true);
+  useEffect(() => {
+
+    const counterData = readLocalStorage();
     
-  }
+   
+    
+    setCountChats(counterData.countChats);
+    setCountImag(counterData.countImag);
+    setCountAbu(counterData.countAbu);
+    setCountSkip(counterData.countSkip);
+    setCountModel(counterData.countModel);
+    setCountAudio(counterData.countAudio);
+   
+        
+    
+  }, [])
+  
 
-  const activaImagen = () =>{
-    setIsCheckedC(false);
-    setIsCheckedI(true);
-    setIsCheckedA(false);
-  }
+  const saveCountersToLocalStorage = (newCount, que) => {
+    const countersData = {
+      countChats,
+      countImag,
+      countAbu,
+      countSkip,
+      countModel,
+      countAudio
+    };
 
+    if(que==='chat'){
+      countersData.countChats = newCount;
+    } else if (que==='img'){
+      countersData.countImag = newCount;
+    }else if (que==='abs'){
+      countersData.countAbu = newCount;
+    }else if (que==='skp'){
+      countersData.countSkip = newCount;
+    }else if (que==='mdl'){
+      countersData.countModel = newCount;
+    }else if (que==='aud'){
+      countersData.countAudio = newCount;
+    }
 
-const handleAdd = (que) => {
-  if (que =='chat') {
-    setCountChats(prevCountChats => {
-      const newCount = prevCountChats + 1;
-      saveLocal(newCount, countImag);
-      return newCount;
-    });
-  } if(que =='img') {
-    setCountImag(prevCountImag => {
-      const newCount = prevCountImag + 1;
-      saveLocal(countChats, newCount);
-      return newCount;
-    });
-  }if(que =='abs') {
-    setCountAbu(prevCountAbu => {
-      const newCount = prevCountAbu + 1;
-      saveLocal(countChats, newCount);
-      return newCount;
-    });
-  }if (que =='skp') {
-    setCountSkip(prevCountSkip => {
-      const newCount = prevCountSkip + 1;    
-      saveLocal(countSkip, newCount);  
-      return newCount;
-    });
-  } if(que =='mdl') {
-    setCountModel(prevCountModel => {
-      const newCount = prevCountModel + 1;
-      saveLocal(countModel, newCount);  
-      return newCount;
-    });
-  }if(que =='aud') {
-    setCountAudio(prevCountAudio => {
-      const newCount = prevCountAudio + 1;
-      saveLocal(countAudio, newCount);  
-      return newCount;
-    });
-  }
-
-
-
-  setTiempo(0);
-};
+   
+    localStorage.setItem('countersData', JSON.stringify(countersData));
+    
+  };
 
 
 
 
-// const handleSus = () => {
-//   if (isCheckedC) {
-//     setCountChats(prevCountChats => {
-//       const newCount = prevCountChats - 1;
-//       saveLocal(newCount, countImag);
-//       return newCount;
-//     });
-//   } if(isCheckedI) {
-//     setCountImag(prevCountImag => {
-//       const newCount = prevCountImag - 1;
-//       saveLocal(countChats, newCount);
-//       return newCount;
-//     });
-//   }if(isCheckedA) {
-//     setCountAbu(prevCountAbu => {
-//       const newCount = prevCountAbu - 1;
-//       saveLocal(countAbu, newCount);
-//       return newCount;
-//     });
-//   }
 
-//   setTiempo(0);
-// };
+
+  const handleAdd = (que) => {
+    // Actualizar los contadores
+    if (que === 'chat') {
+      setCountChats(prevCount => {
+       const newCount = prevCount + 1;
+       saveCountersToLocalStorage( newCount, que);
+       return newCount;
+      });
+    } else if (que === 'img') {
+      setCountImag(prevCount => {
+       const newCount = prevCount + 1;
+       saveCountersToLocalStorage( newCount, que);
+       return newCount;
+      });
+    } else if (que === 'abs') {
+      setCountAbu(prevCount => {
+       const newCount = prevCount + 1;
+       saveCountersToLocalStorage( newCount, que);
+       return newCount;
+      });
+    } else if (que === 'skp') {
+      setCountSkip(prevCount => {
+       const newCount = prevCount + 1;
+       saveCountersToLocalStorage( newCount, que);
+       return newCount;
+      });
+    } else if (que === 'mdl') {
+      setCountModel(prevCount => {
+       const newCount = prevCount + 1;
+       saveCountersToLocalStorage( newCount, que);
+       return newCount;
+      });
+    } else if (que === 'aud') {
+      setCountAudio(prevCount => {
+       const newCount = prevCount + 1;
+       saveCountersToLocalStorage( newCount, que);
+       return newCount;
+      });
+    }
+  
+   
+    
+
+  };
+  
 
 
 const handleSus = ( que ) => {
-
-    
+   
  
-    if(que =='chat'){
-      setCountChats(countChats => {
-      const newCount = countChats - 1;
-      saveLocal(newCount, countImag);
-      return newCount;
+  if (que === 'chat') {
+    setCountChats(prevCount => {
+     const newCount = prevCount - 1;
+     saveCountersToLocalStorage( newCount, que);
+     return newCount;
+    });
+  } else if (que === 'img') {
+    setCountImag(prevCount => {
+     const newCount = prevCount - 1;
+     saveCountersToLocalStorage( newCount, que);
+     return newCount;
+    });
+  } else if (que === 'abs') {
+    setCountAbu(prevCount => {
+     const newCount = prevCount - 1;
+     saveCountersToLocalStorage( newCount, que);
+     return newCount;
+    });
+  } else if (que === 'skp') {
+    setCountSkip(prevCount => {
+     const newCount = prevCount - 1;
+     saveCountersToLocalStorage( newCount, que);
+     return newCount;
+    });
+  } else if (que === 'mdl') {
+    setCountModel(prevCount => {
+     const newCount = prevCount - 1;
+     saveCountersToLocalStorage( newCount, que);
+     return newCount;
+    });
+  } else if (que === 'aud') {
+    setCountAudio(prevCount => {
+     const newCount = prevCount - 1;
+     saveCountersToLocalStorage( newCount, que);
+     return newCount;
     });
   }
-    if(que == 'img'){
-      setCountImag(countImag => {
-      const newCount = countImag - 1;
-      saveLocal(countChats, newCount);
-      return newCount;
-    });
-  }if(que =='abs') {
-    setCountAbu(prevCountAbu => {
-      const newCount = prevCountAbu - 1;
-      saveLocal(countAbu, newCount);
-      return newCount;
-    });
-  }if(que =='skp'){
-    setCountSkip(countSkip => {
-    const newCount = countSkip - 1;
-    saveLocal(countSkip, newCount);
-    return newCount;
-  });
-  }
-  if(que == 'mdl'){
-    setCountModel(countModel => {
-    const newCount = countModel - 1;
-    saveLocal(countModel, newCount);
-    return newCount;
-  });
-  }if(que =='aud') {
-  setCountAudio(prevCountAudio => {
-    const newCount = prevCountAudio - 1;
-    saveLocal(countAudio, newCount);
-    return newCount;
-  });
-}
+
+
 
   
 };
-
-
-  
-  const saveLocal = (chats, imag, abu) => {
-    localStorage.setItem('contChats', chats.toString());
-    localStorage.setItem('contImag', imag.toString());  
-    
-  };
-
+ 
 
 
   const handleReset= () => {
@@ -256,11 +193,10 @@ const handleSus = ( que ) => {
     setCountAbu(0);
     setCountSkip(0);
     setCountModel(0);
-    setCountAudio(0);
-    setTiempo(0); 
-    localStorage.setItem('contChats', 0);
-    localStorage.setItem('contImag', 0); 
-    localStorage.setItem('contAbu', 0); 
+    setCountAudio(0); 
+
+    localStorage.removeItem('countersData'); 
+
 
   }
 
@@ -360,10 +296,12 @@ const handleSus = ( que ) => {
         </div>
 
     </div>
-    <div className={`box box-audio animate__animated animate__bounceIn ${audioActive ? 'mostrar' : 'esconder' }`}>
+    <div className={` box-audio animate__animated  ${audioActive ? 'mostrar animate__bounceIn' : 'esconder animate__bounceOut' }`}>
 
       <p className='cuenta-name'>Audios</p>
+      <div className="espacio"></div>
         <p className='cuenta'>{ countAudio}</p>
+        <div className="espacio"></div>
 
         <div className="buttons">
         <button className='plus'  onClick={ () => {handleAdd('aud');  } }>+</button>
@@ -377,64 +315,22 @@ const handleSus = ( que ) => {
 
   <div className="contenedor2">
   <div className="total">
-      {countChats + countImag + countAbu + countSkip + countModel + countAudio}
+      {countChats + countImag + countAbu + countSkip + countModel + countAudio} 
     </div>
         
   </div>
 
 
 
-    
-    {/* <div className="contenedor"> 
-      <div className="caja">
-        <div className="toggle-switch" >
-
-          <button className={`btnToggle ${isCheckedC ? 'chatAct' : 'chatDes'} `} onClick={activaChats}>Chats</button>
-          <button className={`btnToggle ${isCheckedA ? 'abuseAct' : 'abuseDes'}`} onClick={activaAbuse}>Abuse</button>
-
-          <button className={`btnToggle ${isCheckedI ? 'imageAct' : 'imageDes'} `} onClick={activaImagen}>Images</button>
-
-        </div>
-
-            <div className="contador-opcion">
-   
-              <span className='chats'>{ countChats}</span>
-              
-              <span className='imagenes'>{countAbu}</span>
-              <span className='abu'>{countImag}</span>
-            </div>
-
-        <div className="contador-total">
-            <span className='total'>{ countChats + countImag + countAbu }</span>
-            
-        </div>
-
-        <div className="lastTime">
-        <span>{tiempo} min ago</span>
-        </div>
-
-        <div className="botones">
-
-          <button className='min' onClick={ () => {handleSus();  } }>
-            -
-         </button>
-          <button className='add' onClick={ () => {handleAdd();  } }>+</button>
-        </div>
-        
-      </div>
-
-
-    
-    </div>    */}
-
-
- 
-
-
       <div className="reset">
         <button className="clear" onClick={ () => handleReset() } >Clear</button>        
       </div>
 
+      <div className="reset">
+        <a className="clear1" href="/sc.jpg" target="_blank" rel="noopener noreferrer">
+          Weekly CoMo Seating Chart
+        </a>
+      </div>
         
       </>
   )

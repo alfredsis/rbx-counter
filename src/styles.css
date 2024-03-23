@@ -300,12 +300,29 @@
     
     .box{
       width: 17%;
-
-    }
-  
+    }  
     
   }
 
+  .box-audio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 50px;
+    border: var(--border) solid 2px;
+    border-radius: 10px;
+    padding: 35px 10px;
+    margin: 5px 5px;
+    transition:  0.3s ease-in-out;
+    width: 50%;
+  }
+  @media( max-width: 600px){
+    
+    .box-audio{
+      width: 35%;
+    }  
+    
+  }
 
 
   .buttons{
@@ -529,6 +546,27 @@ font-size: 60px;
     color: #797979;
     font-size: 20px;
   }
+  .clear1{
+    text-decoration: none;
+    margin-top: 50px;    
+    padding: 15px 15px;    
+    background-color: #ffffff00;
+    border: 2px solid var(--border);
+    color: var(--cont-txt);
+    font-size: 20px;
+    
+  }
+
+  .clear1:hover{
+    background-color: var(--border);
+    transition:  0.22s ease-in-out;
+    color: #d1d1d1;
+  }
+
+  .espacio{
+    height: 20px;
+  }
+
 
 
   /* ----------Time Picker -------------------------------------- */
