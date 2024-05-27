@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react';
+
+
+
 
 
 export const Timer = () => {
@@ -6,6 +9,7 @@ export const Timer = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectVal, setSelectVal] = useState('');
   const [count, setCount] = useState(59);
+ 
 
 
 
@@ -36,7 +40,7 @@ export const Timer = () => {
 
       setSelectVal(actividad);  
         setShowModal(true);   
-
+        
         
 
       }, timeDiff-60000);
@@ -85,7 +89,10 @@ export const Timer = () => {
         <div className="container-modal" id="container-modal">
           <div className="modal-content">
             <p>{selectVal} en 1 minuto</p>           
-                       
+            <audio id="audio" autoPlay loop src="/pokemonrby.mp3">
+            <source src="pokemonrby.mp3" type="audio/mp3"/>
+            </audio>
+
             <button className="modal-content-btn" onClick={ ()=>{setShowModal(false)}}>Ok</button>
           </div>
         </div>
